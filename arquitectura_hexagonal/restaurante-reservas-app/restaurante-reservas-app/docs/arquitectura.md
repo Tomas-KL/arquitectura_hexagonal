@@ -1,3 +1,0 @@
-Este documento se describe la arquitectura hexagonal utilizada para la app de reservas.
-Incluye los puertos (interfaces) y adaptadores que conectan con sistemas como
-Kafka, SMTP, bases de datos SQL/NoSQL y pasarelas de pago.

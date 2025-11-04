@@ -1,7 +1,0 @@
-const dbHost = process.env.DB_HOST;
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
-
-export const connectDatabase = async () => {
-  console.log(`Conectado a base de datos en ${dbHost}... `);
-};
