@@ -1,11 +1,25 @@
-class Mesa {
-  constructor(id, numero, capacidad) {
-    this.id = id;
-    this.numero = numero;
-    this.capacidad = capacidad;
-    this.ocupada = false;
-  }
+module.exports = (sequelize, DataTypes) => {
+  const Mesa = sequelize.define('Mesa', {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    numero: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    capacidad: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 4
+    },
+    ubicacion: {
+      type: DataTypes.STRING
+    }
+  }, {
+    tableName: 'mesas'
+  });
 
-  ocupar() { this.ocupada = true; }
-  liberar() { this.ocupada = false; }
-}
+  return Mesa;
+};
