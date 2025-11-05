@@ -1,32 +1,26 @@
-const { models } = require('../../src/infrastructure/database') || require('../../infrastructure/database');
-
 class MySQLReservaRepository {
-  constructor(dbModels) {
-    this.Reserva = dbModels.Reserva;
-    this.Cliente = dbModels.Cliente;
-    this.Mesa = dbModels.Mesa;
+  constructor({ Reserva, Cliente, Mesa }) {
+    this.Reserva = Reserva;
+    this.Cliente = Cliente;
+    this.Mesa = Mesa;
   }
 
-  async create(reservaData) {
-    const reserva = await this.Reserva.create(reservaData);
-    return reserva.toJSON();
+  async create(data) {
+    return await this.Reserva.create(data);
+  }
+
+  async findAll() {
+    return await this.Reserva.findAll({ include: [this.Cliente, this.Mesa] });
   }
 
   async findById(id) {
-    const r = await this.Reserva.findByPk(id, { include: [this.Cliente, this.Mesa] });
-    return r ? r.toJSON() : null;
+    return await this.Reserva.findByPk(id, { include: [this.Cliente, this.Mesa] });
   }
 
-  async findAll(filter = {}) {
-    const list = await this.Reserva.findAll({ where: filter, include: [this.Cliente, this.Mesa] });
-    return list.map(r => r.toJSON());
-  }
-
-  async update(id, updates) {
+  async update(id, data) {
     const reserva = await this.Reserva.findByPk(id);
     if (!reserva) return null;
-    await reserva.update(updates);
-    return reserva.toJSON();
+    return await reserva.update(data);
   }
 
   async delete(id) {

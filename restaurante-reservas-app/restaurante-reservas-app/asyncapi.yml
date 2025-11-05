@@ -1,0 +1,31 @@
+asyncapi: '2.4.0'
+info:
+  title: Restaurante Reservas - Eventos AsyncAPI
+  version: '1.0.0'
+channels:
+  reserva/creada:
+    publish:
+      summary: Evento cuando se crea una reserva
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+          clienteId:
+            type: string
+          mesaId:
+            type: integer
+          fechaHoraInicio:
+            type: string
+  reserva/cancelada:
+    publish:
+      summary: Evento cuando se cancela una reserva
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+servers:
+  kafka:
+    url: kafka:9092
+    protocol: kafka
